@@ -9,7 +9,6 @@ module.exports = (req, res, next) =>{
     // verify if token is valid
     if(token){
         jwt.verify(token, secret, (err, decodedToken) =>{
-            console.log('in heimdall', decodedToken)
             if(err){
                 res.status(401).json({err: 'ACCESS DENIED'})
             } else {
