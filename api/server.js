@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const usersRouter = require("../users/users-router.js");
 const authRouter = require("../auth/auth-router.js");
-const authenticator = require("../auth/authenticator");
+// require auth middleware
 
 const server = express();
 
@@ -14,7 +14,7 @@ server.use(express.json());
 server.use(cors());
 
 
-server.use("/api/users", authenticator, usersRouter);
+server.use("/api/users", usersRouter); // add auth middleware here
 server.use("/api/auth", authRouter)
 
 server.get("/", (req, res) => {
