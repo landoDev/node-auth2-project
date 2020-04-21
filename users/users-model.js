@@ -1,16 +1,28 @@
-const router = require("express").Router();
+const db = require('../data/dbConfig')
 
-const Users = require("./users-model.js");
-
-
-router.get("/", (req, res) => {
-  console.log('token', req.decodedToken)
-  Users.find()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => res.send(err));
-});
+module.exports = {
+    add,
+    find,
+    findBy,
+    findById
+}
 
 
-module.exports = router;
+// ask why this needs to be an async function
+async function add (user) {
+    const [id] = await('users').insert(user, 'id');
+
+    return findById(id); // if this breaks on the front end, just return the user?
+}
+
+function find(){
+    return db('users').select('id', 'username');
+}
+
+function findBy(param){
+    return db('users').where(param);
+}
+
+function findById(id) {
+
+}
