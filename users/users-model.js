@@ -10,7 +10,7 @@ module.exports = {
 
 // ask why this needs to be an async function
 async function add (user) {
-    const [id] = await('users').insert(user, 'id');
+    const [id] = await db('users').insert(user, 'id');
 
     return findById(id); // if this breaks on the front end, just return the user?
 }

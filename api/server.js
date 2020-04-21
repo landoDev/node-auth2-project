@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const usersRouter = require("../users/users-router.js");
 const authRouter = require("../auth/auth-router.js");
-// require auth middleware
+const heimdall = require("../auth/heimdall");
 
 const server = express();
 
@@ -14,7 +14,7 @@ server.use(express.json());
 server.use(cors());
 
 
-server.use("/api/users", usersRouter); // add auth middleware here
+server.use("/api/users", heimdall, usersRouter); // add auth middleware here
 server.use("/api/auth", authRouter)
 
 server.get("/", (req, res) => {
